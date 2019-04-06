@@ -1,2 +1,54 @@
 {{!-- Left off here --}}
-<h1>THis is a test</h1>
+<div class="container">
+    <div class="row">
+        <div class="center col-sm-12">
+            <img src="https://media-cdn.tripadvisor.com/media/photo-s/07/50/f6/d1/john-s-burger.jpg">
+            <h1>Eat-Da-Burger!!!</h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Add a Burger!</h2>
+        {{!-- This is not working! --}}
+        <form action="/api/burger" method="POST">
+
+            <div class="form-group">
+                <label for="burg">Burger Name:</label>
+                <input type="text" id="burg" name="burger_name" placeholder="Enter burger name">
+            </div>
+
+            <button class="btn-primary" type="submit">Submit Order</button>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Burgers available</h2>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <h1>Made</h1>
+        {{#each burgers}}
+        {{#unless devoured}}
+        <p>{{ burger_name }}</p>
+        <form action="/burger/{{id}}?_=PUT" method="POST">
+            <button type="submit">Devour it!</button>
+        </form>
+        {{/unless}}
+        {{/each}}
+    </div>
+
+    <div class="col-md-12">
+        <h1>Devoured</h1>
+
+        {{#each burgers}}
+        {{#if devoured}}
+        <p>{{ burger_name }}</p>
+        {{/if}}
+        {{/each}}
+    </div>
+</div>

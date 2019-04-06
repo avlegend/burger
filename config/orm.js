@@ -1,7 +1,7 @@
 // Import MySQL connection.
 const connection = require("./connection");
 
-const orm = {
+const orm = { 
     selectAll: function (table, cb) {
         connection.query("SELECT * FROM ??", [table], (err, results) => {
             if(err) {
@@ -21,11 +21,20 @@ const orm = {
 
     },
     //     updateOne: function(){}
-    updateOne: function(table, burger_name, cb) {
-        connection.query()
+    // FIND OUT HOW TO UPDATE JUST ONE USING ~WHERE~
+    updateOne: function(table, col, newValue, valueId,  cb) {
+        connection.query("UPDATE ?? SET ?? = ? WHERE id = ?", [table, col, newValue, valueId], (err, results) => {
+            if (err) {
+                throw err;
+            }
+            cb(results)
+        })
     }
 };
 
+// orm.updateOne("burgers", "burger_name", "mushroom burger", 1, (data) => {
+//     console.log(data);
+// })
 // const myBurger = {
 //     burger_name: "lettus wrap burger"
 // }
